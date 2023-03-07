@@ -13,4 +13,15 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="BottomAppBarStyle" parent="Widget.MaterialComponents.BottomAppBar.Colored">
+        <item name="background">?attr/colorPrimary</item>
+    </style>
+
+    <style name="BottomNavigationStyle">
+        <item name="android:background">@drawable/gradient_bottom_nav</item>
+        <item name="itemIconTint">@color/bnv_tab_item_foreground</item>
+        <item name="itemTextColor">@color/bnv_tab_item_foreground</item>
+    </style>
+
 </resources>

@@ -8,6 +8,21 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.rgp.feedbapp.fragments.HomeFragment"
-        android:label="Home"
+        android:label="Inicio"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/navigation_calendar"
+        android:name="com.rgp.feedbapp.fragments.CalendarFragment"
+        android:label="Calendario"
+        tools:layout="@layout/fragment_calendar" />
+    <fragment
+        android:id="@+id/navigation_contract"
+        android:name="com.rgp.feedbapp.fragments.ContractFragment"
+        android:label="Contrataciones"
+        tools:layout="@layout/fragment_contract" />
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.rgp.feedbapp.fragments.ProfileFragment"
+        android:label="Perfil"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

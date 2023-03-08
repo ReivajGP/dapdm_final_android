@@ -17,11 +17,14 @@ import com.rgp.feedbapp.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var navController: NavController
 
     // Activity lifecycle methods
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupView()
+        setupActionBar()
+        setupSideMenu()
     }
 
     // Public methods
@@ -37,8 +40,10 @@ class MainActivity : AppCompatActivity() {
     private fun setupView() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+    }
 
-        val navController = findNavController((R.id.navHostFragment))
+    private fun setupActionBar() {
+        navController = findNavController((R.id.navHostFragment))
 
         val appBarConfig = AppBarConfiguration(
             setOf(
@@ -51,11 +56,13 @@ class MainActivity : AppCompatActivity() {
 
         setupActionBarWithNavController(navController, appBarConfig)
         binding.navView.setupWithNavController(navController)
+    }
 
+    private fun setupSideMenu() {
         val slideMenuNavController = Navigation.findNavController(this, R.id.navHostFragment)
         NavigationUI.setupWithNavController(binding.nvMain, slideMenuNavController)
 
-        navController.addOnDestinationChangedListener(NavController.OnDestinationChangedListener { controller, destination, arguments ->
+        navController.addOnDestinationChangedListener(NavController.OnDestinationChangedListener { _, destination, _ ->
             binding.tvTitle.text = destination.label
         })
     }

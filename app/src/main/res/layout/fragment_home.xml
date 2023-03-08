@@ -1,13 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black"
     tools:context=".fragments.HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/tv_social_networks_title"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:text="Redes sociales"
+            android:textSize="25sp"/>
+
+        <View
+            android:id="@+id/v_social_networks_separator"
+            android:layout_below="@id/tv_social_networks_title"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/teal_700" />
+
+
+        <include
+            android:id="@+id/v_social_networks"
+            android:layout_height="150dp"
+            android:layout_width="wrap_content"
+            android:layout_below="@id/v_social_networks_separator"
+            layout="@layout/layout_social_networks"/>
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

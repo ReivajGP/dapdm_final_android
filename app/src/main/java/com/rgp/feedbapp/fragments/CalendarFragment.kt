@@ -1,33 +1,43 @@
 package com.rgp.feedbapp.fragments
 
 import android.os.Bundle
+import android.os.RecoverySystem
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.rgp.feedbapp.R
+import com.rgp.feedbapp.adapters.CalendarAdapter
+import com.rgp.feedbapp.databinding.FragmentCalendarBinding
+import com.rgp.feedbapp.databinding.FragmentHomeBinding
+import com.rgp.feedbapp.model.CalendarItem
+import com.rgp.feedbapp.utils.AppConstants
+import com.rgp.feedbapp.utils.CalendarAPI
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.util.Calendar
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private lateinit var adapter: CalendarAdapter
+private lateinit var recyclerView: RecyclerView
+private lateinit var calendarItems: ArrayList<CalendarItem>
 
-/**
- * A simple [Fragment] subclass.
- * Use the [CalendarFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class CalendarFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
+    // Properties
+    private var _binding: FragmentCalendarBinding? = null
+    private val binding get() = _binding!!
+    private val constants = AppConstants
+
+    // Fragment lifecycle methods
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
@@ -35,26 +45,35 @@ class CalendarFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_calendar, container, false)
+        requestCalendarEvents()
+        _binding = FragmentCalendarBinding.inflate(LayoutInflater.from(context))
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CalendarFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CalendarFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
+    //Private methods
+    private fun requestCalendarEvents() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val apiCall = constants.getRetrofit().create(CalendarAPI::class.java).getCalendarEvents(constants.CALENDAR_ENDPOINT)
+            apiCall.enqueue(object: Callback<ArrayList<CalendarItem>> {
+                override fun onResponse(
+                    call: Call<ArrayList<CalendarItem>>,
+                    response: Response<ArrayList<CalendarItem>>
+                ) {
+                    Log.d("CALENDAR", "Respuesta del servidor: ${response}")
+                    Log.d("CALENDAR", "Datos: ${response.body().toString()}")
+                    binding.rvCalendar.layoutManager = LinearLayoutManager(requireContext())
+                    binding.rvCalendar.adapter = CalendarAdapter(requireContext(), response.body()!!)
                 }
-            }
+
+                override fun onFailure(call: Call<ArrayList<CalendarItem>>, t: Throwable) {
+                    Log.e("CALENDAR", "ERROR: No se pudo conectar al servicio: ${t.message}")
+                }
+            })
+        }
     }
 }

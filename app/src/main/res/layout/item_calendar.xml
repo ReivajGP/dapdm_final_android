@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black"
+    android:padding="5dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_calendar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/ic_launcher_foreground"
+        />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toRightOf="@id/iv_calendar"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="Día del calendario"
+        android:layout_marginLeft="10dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/tv_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toRightOf="@id/iv_calendar"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:textStyle="italic"
+        android:text="Descripción del evento en el calendario. "
+        />
+
+    <TextView
+        android:id="@+id/tv_schedule"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toRightOf="@id/iv_calendar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_description"
+        android:gravity="center"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Horario."
+        />
+
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_social_networks_title"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_schedule"
+        layout="@layout/separator"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

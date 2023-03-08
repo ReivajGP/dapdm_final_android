@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.rgp.feedbapp.databinding.FragmentHomeBinding
+import com.rgp.feedbapp.utils.SocialMedia
 
 
 class HomeFragment : Fragment() {
@@ -27,12 +28,6 @@ class HomeFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
-    }
-
-    enum class SocialMedia {
-        FACEBOOK,
-        INSTAGRAM,
-        YOUTUBE
     }
 
     // Private methods

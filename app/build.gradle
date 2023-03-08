@@ -37,12 +37,25 @@ android {
 
 dependencies {
 
+    //Definitions
+    def retrofitVersion = '2.9.0'
+    
     //Navigation component
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
 
     //Rounded Image View
     implementation 'com.makeramen:roundedimageview:2.3.0'
+
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.15.0'
+
+    // Lottie
+    implementation 'com.airbnb.android:lottie:4.1.0'
+
+    // Networking (Retrofit)
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.6.0'

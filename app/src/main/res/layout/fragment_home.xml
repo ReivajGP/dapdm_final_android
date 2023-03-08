@@ -18,22 +18,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="15dp"
-            android:text="Redes sociales"
+            android:text="¡Síguenos!"
             android:textSize="25sp"/>
 
-        <View
-            android:id="@+id/v_social_networks_separator"
+        <include
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@id/tv_social_networks_title"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/teal_700" />
-
+            layout="@layout/separator"
+            />
 
         <include
             android:id="@+id/v_social_networks"
             android:layout_height="150dp"
             android:layout_width="wrap_content"
-            android:layout_below="@id/v_social_networks_separator"
+            android:layout_below="@id/tv_social_networks_title"
             layout="@layout/layout_social_networks"/>
 
     </RelativeLayout>

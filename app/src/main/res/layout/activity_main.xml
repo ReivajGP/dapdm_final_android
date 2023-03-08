@@ -38,6 +38,7 @@
             android:id="@+id/ivMenu"
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:padding="5dp"
             android:contentDescription="@string/app_name"
             android:layout_alignParentEnd="true"
             android:onClick="click"
@@ -46,15 +47,24 @@
 
     </RelativeLayout>
 
-    <fragment
-        android:id="@+id/navHostFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="?actionBarSize"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        app:defaultNavHost="true"
-        app:navGraph="@navigation/nav_graph"
-        />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black"
+            android:layout_marginTop="?actionBarSize"
+            android:layout_marginBottom="?actionBarSize"
+            >
+
+            <fragment
+                android:id="@+id/navHostFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:name="androidx.navigation.fragment.NavHostFragment"
+                app:defaultNavHost="true"
+                app:navGraph="@navigation/nav_graph"
+                />
+        </ScrollView>
+
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/babMain"

@@ -25,4 +25,14 @@
         android:name="com.rgp.feedbapp.fragments.ProfileFragment"
         android:label="Perfil"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/slide_menu_introduction"
+        android:name="com.rgp.feedbapp.fragments.IntroductionFragment"
+        android:label="Presentación"
+        tools:layout="@layout/fragment_introduction" />
+    <fragment
+        android:id="@+id/slide_menu_comments"
+        android:name="com.rgp.feedbapp.fragments.CommentsFragment"
+        android:label="Comentarios"
+        tools:layout="@layout/fragment_comments" />
 </navigation>

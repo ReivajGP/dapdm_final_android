@@ -1,5 +1,6 @@
 package com.rgp.feedbapp.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -13,11 +14,14 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.rgp.feedbapp.R
 import com.rgp.feedbapp.databinding.ActivityMainBinding
+import com.rgp.feedbapp.model.TicketItem
+import com.rgp.feedbapp.utils.AppConstants
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
+    private val constants = AppConstants
 
     // Activity lifecycle methods
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +38,13 @@ class MainActivity : AppCompatActivity() {
                 binding.dlMain.openDrawer(GravityCompat.START)
             }
         }
+    }
+
+    fun ticketSelected(ticket: TicketItem) {
+        val intent = Intent(this@MainActivity, TicketSummaryActivity::class.java).apply {
+            putExtra(constants.INTENT_MAIN_TO_TICKET_SUMMARY_TICKET_ID, ticket)
+        }
+        startActivity(intent)
     }
 
     // Private methods

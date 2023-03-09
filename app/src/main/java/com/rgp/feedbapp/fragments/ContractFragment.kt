@@ -44,6 +44,7 @@ class ContractFragment : Fragment() {
         binding.cvNewHiring.setOnClickListener {
             Log.d("CONTRACT", "ADD BUTTON PRESSED")
         }
+
     }
 
     private fun requestTickets() {
@@ -54,8 +55,6 @@ class ContractFragment : Fragment() {
                     call: Call<ArrayList<TicketItem>>,
                     response: Response<ArrayList<TicketItem>>
                 ) {
-                    Log.d("TICKET", "Respuesta del servidor: ${response}")
-                    Log.d("TICKET", "Datos: ${response.body().toString()}")
                     binding.rvContracts.layoutManager = LinearLayoutManager(requireContext())
                     binding.rvContracts.adapter = TicketAdapter(requireContext(), response.body()!!)
                 }

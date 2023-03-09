@@ -55,8 +55,6 @@ class CalendarFragment : Fragment() {
                     call: Call<ArrayList<CalendarItem>>,
                     response: Response<ArrayList<CalendarItem>>
                 ) {
-                    Log.d("CALENDAR", "Respuesta del servidor: ${response}")
-                    Log.d("CALENDAR", "Datos: ${response.body().toString()}")
                     binding.rvCalendar.layoutManager = LinearLayoutManager(requireContext())
                     binding.rvCalendar.adapter = CalendarAdapter(requireContext(), response.body()!!)
                 }

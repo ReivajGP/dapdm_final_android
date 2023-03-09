@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.rgp.feedbapp.R
+import com.rgp.feedbapp.activities.MainActivity
 import com.rgp.feedbapp.model.TicketItem
 
 class TicketAdapter(val context: Context, val ticketItems: ArrayList<TicketItem>): RecyclerView.Adapter<TicketAdapter.TicketItemViewHolder>() {
@@ -31,6 +32,9 @@ class TicketAdapter(val context: Context, val ticketItems: ArrayList<TicketItem>
         holder.tvTicketNumber.text = ticketItems[position].ticketNumber
         holder.tvDate.text = ticketItems[position].eventDate
         holder.tvTime.text = ticketItems[position].eventTime
+        holder.itemView.setOnClickListener {
+            if(context is MainActivity) context.ticketSelected(ticketItems[position])
+        }
     }
 
     class TicketItemViewHolder(ticketItemView: View) : RecyclerView.ViewHolder(ticketItemView) {

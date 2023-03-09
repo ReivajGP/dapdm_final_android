@@ -9,6 +9,7 @@ data class TicketItem(
     var ticketStatus: Int,
     var contactName: String,
     var contactPhone: String,
+    var contactPhoto: String,
     var eventDate: String,
     var eventTime: String,
     var numberOfSets: Int,

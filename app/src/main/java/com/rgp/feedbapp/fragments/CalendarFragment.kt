@@ -1,18 +1,14 @@
 package com.rgp.feedbapp.fragments
 
 import android.os.Bundle
-import android.os.RecoverySystem
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.rgp.feedbapp.R
 import com.rgp.feedbapp.adapters.CalendarAdapter
 import com.rgp.feedbapp.databinding.FragmentCalendarBinding
-import com.rgp.feedbapp.databinding.FragmentHomeBinding
 import com.rgp.feedbapp.model.CalendarItem
 import com.rgp.feedbapp.utils.AppConstants
 import com.rgp.feedbapp.utils.CalendarAPI
@@ -22,11 +18,6 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.Calendar
-
-private lateinit var adapter: CalendarAdapter
-private lateinit var recyclerView: RecyclerView
-private lateinit var calendarItems: ArrayList<CalendarItem>
 
 class CalendarFragment : Fragment() {
 

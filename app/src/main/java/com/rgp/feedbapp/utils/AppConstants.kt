@@ -7,6 +7,7 @@ object AppConstants {
     // URLs
     const val CALENDAR_BASE_URL = "https://private-5acf0e-feedbapp.apiary-mock.com"
     const val CALENDAR_ENDPOINT = "/events"
+    const val TICKETS_ENDPOINT = "/tickets"
 
     fun getRetrofit(): Retrofit {
         return Retrofit.Builder()

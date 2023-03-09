@@ -27,6 +27,6 @@
         android:layout_below="@id/tv_calendar_title"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem=""/>
+        tools:listitem="@layout/item_calendar"/>
 
 </RelativeLayout>

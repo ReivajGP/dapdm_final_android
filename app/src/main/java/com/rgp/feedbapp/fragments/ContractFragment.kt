@@ -1,60 +1,69 @@
 package com.rgp.feedbapp.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.rgp.feedbapp.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.rgp.feedbapp.adapters.CalendarAdapter
+import com.rgp.feedbapp.adapters.TicketAdapter
+import com.rgp.feedbapp.databinding.FragmentContractBinding
+import com.rgp.feedbapp.model.TicketItem
+import com.rgp.feedbapp.utils.AppConstants
+import com.rgp.feedbapp.utils.TicketAPI
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ContractFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ContractFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    // Properties
+    private var _binding: FragmentContractBinding? = null
+    private val binding get() = _binding!!
+    private val constants = AppConstants
 
+    // Fragment lifecycle methods
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_contract, container, false)
+        _binding = FragmentContractBinding.inflate(LayoutInflater.from(context))
+        setupClickListeners()
+        requestTickets()
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ContractFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ContractFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    // Private methods
+    private fun setupClickListeners() {
+        binding.cvNewHiring.setOnClickListener {
+            Log.d("CONTRACT", "ADD BUTTON PRESSED")
+        }
+    }
+
+    private fun requestTickets() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val apiCall = constants.getRetrofit().create(TicketAPI::class.java).getTicketsData(constants.TICKETS_ENDPOINT)
+            apiCall.enqueue(object: Callback<ArrayList<TicketItem>> {
+                override fun onResponse(
+                    call: Call<ArrayList<TicketItem>>,
+                    response: Response<ArrayList<TicketItem>>
+                ) {
+                    Log.d("TICKET", "Respuesta del servidor: ${response}")
+                    Log.d("TICKET", "Datos: ${response.body().toString()}")
+                    binding.rvContracts.layoutManager = LinearLayoutManager(requireContext())
+                    binding.rvContracts.adapter = TicketAdapter(requireContext(), response.body()!!)
                 }
-            }
+
+                override fun onFailure(call: Call<ArrayList<TicketItem>>, t: Throwable) {
+                    Log.e("TICKET", "ERROR: No se pudo conectar al servicio: ${t.message}")
+                }
+            })
+        }
     }
 }

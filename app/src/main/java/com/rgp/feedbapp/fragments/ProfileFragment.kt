@@ -1,60 +1,106 @@
 package com.rgp.feedbapp.fragments
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.firebase.auth.FirebaseAuth
 import com.rgp.feedbapp.R
+import com.rgp.feedbapp.activities.MainActivity
+import com.rgp.feedbapp.databinding.FragmentProfileBinding
+import com.rgp.feedbapp.helpers.AuthenticationHelper
+import com.rgp.feedbapp.helpers.ToastHelper
+import com.rgp.feedbapp.utils.AppConstants
+import com.rgp.feedbapp.utils.AuthRequest
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class ProfileFragment() : Fragment() {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class ProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    // Properties
+    private var _binding: FragmentProfileBinding? = null
+    private val binding get() = _binding!!
+    private val constants = AppConstants
 
+    // Fragment lifecycle methods
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
+        FragmentProfileBinding.inflate(inflater, container, false).let {
+            _binding = it
+            it.root
         }
-    }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
-    }
+    override fun onStart() {
+        super.onStart()
+        //auth = FirebaseAuth()
+        //val currentUser = auth.currentUser
+        //Log.d("PROFILE", "HERE WE ARE!")
+        //if (currentUser != null) {
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ProfileFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProfileFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        //}
+    }
+    // Private methods
+    private fun setOnClickListeners() {
+        // Inicio de sesión
+        binding.btLogin.setOnClickListener {
+            if (areTextFieldsEntriesValid()) {
+                /*
+                //loaderHelper.presentLoader()
+                (context as MainActivity).authenticationHelper.logIn(binding.etEmail.text.toString(), binding.etPass.text.toString()) { isLoginSuccessful ->
+                  //  loaderHelper.hideLoader()
+                    if (isLoginSuccessful) {
+                        /*
+                        // TODO: Pasar a la pantalla de catálogo
+                        val intent = Intent(this, LyricsCatalogActivity::class.java).apply {
+                            putExtra(Constants.INTENT_USER_ID, binding.etEmail.text.toString())
+                        }
+                        startActivity(intent)
+                        finish()
+                        */
+                        Log.d("PERFIL", "SESIÓN INICIADA")
+                    } else {
+                        Log.d("PERFIL", "PROBLEMA AL INICIAR SESIÓN")
+                    }
                 }
+
+                 */
             }
+        }
+
+        // Registro
+        binding.btSignIn.setOnClickListener {
+            if (areTextFieldsEntriesValid()) { /*
+                //loaderHelper.presentLoader()
+                (context as MainActivity).authenticationHelper.signIn(binding.etEmail.text.toString(), binding.etPass.text.toString()) { isSignUpSuccessful ->
+                    //loaderHelper.hideLoader()
+                    if (isSignUpSuccessful) {
+                        // TODO: Ver qué hacer aquí 🥲
+                        Log.d("PERFIL", "CUENTA CREADA")
+                    } else {
+                        Log.d("PERFIL", "PROBLEMA AL CREAR CUENTA")
+                    }
+                }
+                */
+            }
+        }
+
+        // Recuperación de contraseña
+        /*binding.btRecoverPass.setOnClickListener {
+            (context as MainActivity).authenticationHelper.recoverPassword(binding.etEmail.text.toString())
+        }*/
+    }
+
+    private fun areTextFieldsEntriesValid(): Boolean {
+        if (binding.etEmail.text.isEmpty() || binding.etPass.text.isEmpty()) {
+            activity?.let {
+                ToastHelper(it.applicationContext).showToast(constants.ON_EMPTY_FIELD_TOAST_MESSAGE)
+            }
+            return false
+        }
+        return true
     }
 }

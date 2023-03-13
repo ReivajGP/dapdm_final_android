@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "375154046695",
+    "project_id": "feedbapp-android",
+    "storage_bucket": "feedbapp-android.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:375154046695:android:a7706312df9fbce4a89442",
+        "android_client_info": {
+          "package_name": "com.rgp.feedbapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "375154046695-q5ivkbe6qs0f717ndgicvi5detbfr926.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rgp.feedbapp",
+            "certificate_hash": "8d4bedf120a6c35a3b489b5e7cdae4d160e999fe"
+          }
+        },
+        {
+          "client_id": "375154046695-jn7noe0skbm2tbjbjvs6lmg0e86bmoin.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC45QWnEQV7M3Mu87R_04nF-2IB8q8f-lE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "375154046695-jn7noe0skbm2tbjbjvs6lmg0e86bmoin.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

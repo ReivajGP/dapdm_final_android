@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/new_contract_activity_nav_graph"
+    app:startDestination="@id/newContractStepOneFragment">
+
+    <fragment
+        android:id="@+id/newContractStepOneFragment"
+        android:name="com.rgp.feedbapp.fragments.NewContractStepOneFragment"
+        android:label="fragment_new_contract_step_one"
+        tools:layout="@layout/fragment_new_contract_step_one" />
+</navigation>

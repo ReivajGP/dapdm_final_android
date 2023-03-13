@@ -1,5 +1,6 @@
 package com.rgp.feedbapp.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -7,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.rgp.feedbapp.activities.MainActivity
+import com.rgp.feedbapp.activities.NewContractActivity
 import com.rgp.feedbapp.adapters.CalendarAdapter
 import com.rgp.feedbapp.adapters.TicketAdapter
 import com.rgp.feedbapp.databinding.FragmentContractBinding
@@ -28,13 +31,17 @@ class ContractFragment : Fragment() {
     private val constants = AppConstants
 
     // Fragment lifecycle methods
+    override fun onStart() {
+        super.onStart()
+        setupClickListeners()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentContractBinding.inflate(LayoutInflater.from(context))
-        setupClickListeners()
         requestTickets()
         return binding.root
     }
@@ -42,9 +49,12 @@ class ContractFragment : Fragment() {
     // Private methods
     private fun setupClickListeners() {
         binding.cvNewHiring.setOnClickListener {
-            Log.d("CONTRACT", "ADD BUTTON PRESSED")
+            activity.let {
+                if (it is MainActivity) {
+                    it.newContractSelected()
+                }
+            }
         }
-
     }
 
     private fun requestTickets() {

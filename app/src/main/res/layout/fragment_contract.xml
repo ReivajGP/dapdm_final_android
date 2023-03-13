@@ -29,7 +29,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="¡Nueva contratación 😃"
+                android:text="¡Nueva contratación! ⭐️"
                 android:textSize="22sp"
                 android:textColor="@color/black"
                 android:layout_gravity="center"/>

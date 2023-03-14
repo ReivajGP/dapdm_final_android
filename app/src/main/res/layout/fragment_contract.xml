@@ -7,6 +7,14 @@
     tools:context=".fragments.ContractFragment"
     android:padding="15dp">
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
+    </ProgressBar>
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_new_hiring"
         android:layout_width="match_parent"

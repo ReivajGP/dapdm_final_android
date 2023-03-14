@@ -3,6 +3,7 @@ package com.rgp.feedbapp.helpers
 import android.content.Context
 import android.content.DialogInterface
 import android.text.InputType
+import android.util.Log
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
@@ -44,7 +45,7 @@ class AuthenticationHelper(private val context: Context) {
         }
     }
 
-    fun recoverPassword(email: String){
+    fun recoverPassword(email: String, callback: (Boolean) -> Unit){
         val resetMail = EditText(context)
 
         resetMail.inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
@@ -57,8 +58,10 @@ class AuthenticationHelper(private val context: Context) {
             val mail = resetMail.text.toString()
             if(mail.isNotEmpty()){
                 firebaseAuth.sendPasswordResetEmail(mail)?.addOnSuccessListener {
+                    callback(true)
                     ToastHelper(context).showToast(constants.AUTH_RESET_PASS_ALERT_EMAIL_SENT_MESSAGE)
                 }?.addOnFailureListener {
+                    callback(false)
                     ToastHelper(context).showToast("${constants.AUTH_MESSAGE_REGISTER_MAIL_NOT_SENT}: ${it.message}")
                 }
             }else{
@@ -76,4 +79,6 @@ class AuthenticationHelper(private val context: Context) {
         firebaseAuth.signOut()
         callback()
     }
+
+    fun isUserLoggedIn() : Boolean = firebaseAuth.currentUser != null
 }

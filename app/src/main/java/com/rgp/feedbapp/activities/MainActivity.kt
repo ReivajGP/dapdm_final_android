@@ -11,7 +11,6 @@ import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.rgp.feedbapp.R
 import com.rgp.feedbapp.databinding.ActivityMainBinding
@@ -24,15 +23,16 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private val constants = AppConstants
-    //lateinit var authenticationHelper: AuthenticationHelper
 
     // Activity lifecycle methods
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_FeedbApp)
+        Thread.sleep(2500)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //authenticationHelper = AuthenticationHelper(this)
+        AuthenticationHelper(this).signOut {  }
 
         setupActionBar()
         setupSideMenu()
@@ -55,7 +55,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun newContractSelected() {
-        Log.d("CONTRACT", "ADD BUTTON PRESSED")
         val intent = Intent (this, NewContractActivity::class.java)
         startActivity(intent)
     }

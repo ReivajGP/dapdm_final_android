@@ -21,21 +21,15 @@ class NewContractStepFourFragment : Fragment(), OnMapReadyCallback {
 
     // Properties
     private lateinit var map: GoogleMap
-    private var markerCoordinates: LatLng = LatLng(19.445724627294464, -99.13744228386442)
+    private var markerCoordinates: LatLng = LatLng(AppConstants.DEFAULT_MAP_LATITUDE, AppConstants.DEFAULT_MAP_LONGITUDE)
     private var _binding: FragmentNewContractStepFourBinding? = null
     private val binding get() = _binding!!
     private val constants = AppConstants
-
-    // Lifecycle methods
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         _binding = FragmentNewContractStepFourBinding.inflate(LayoutInflater.from(context))
         setUpNumberPicker()
         setNextButtonOnClickListener()
@@ -43,11 +37,16 @@ class NewContractStepFourFragment : Fragment(), OnMapReadyCallback {
         return binding.root
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
     // Private methods
     private fun setUpNumberPicker() {
-        binding.numberPicker.maxValue = 5
-        binding.numberPicker.minValue = 1
-        binding.numberPicker.value = 2
+        binding.numberPicker.maxValue = constants.MAXIMUM_PERFORMANCE_SETS
+        binding.numberPicker.minValue = constants.MINIMUM_PERFORMANCE_SETS
+        binding.numberPicker.value = constants.DEFAULT_PERFORMANCE_SETS
     }
 
     private fun initMap() {
@@ -60,7 +59,6 @@ class NewContractStepFourFragment : Fragment(), OnMapReadyCallback {
             (activity as NewContractActivity).ticket.numberOfSets = binding.numberPicker.value
             (activity as NewContractActivity).ticket.locationLatitude = markerCoordinates.latitude
             (activity as NewContractActivity).ticket.locationLongitude = markerCoordinates.longitude
-            Log.d("STEP_FOUR", "${(activity as NewContractActivity).ticket}")
             goToNextStep()
         }
     }
@@ -77,7 +75,7 @@ class NewContractStepFourFragment : Fragment(), OnMapReadyCallback {
     override fun onMapReady(map: GoogleMap) {
         this.map = map
 
-        val coordinates = LatLng(19.445724627294464, -99.13744228386442)
+        val coordinates = LatLng(AppConstants.DEFAULT_MAP_LATITUDE, AppConstants.DEFAULT_MAP_LONGITUDE)
 
         val marker = MarkerOptions()
             .position(coordinates)

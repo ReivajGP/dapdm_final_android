@@ -19,18 +19,18 @@ class NewContractStepThreeFragment : Fragment() {
     private val binding get() = _binding!!
 
     // Lifecycle methods
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         _binding = FragmentNewContractStepThreeBinding.inflate(LayoutInflater.from(context))
         setOnClickListeners()
         return binding.root
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     // Private methods
@@ -39,7 +39,6 @@ class NewContractStepThreeFragment : Fragment() {
             val hour: Int = binding.timePicker.hour
             val minute: Int = binding.timePicker.minute
             (activity as NewContractActivity).ticket.eventTime = formatTime(hour, minute)
-            Log.d("STEP_THREE", "${(activity as NewContractActivity).ticket}")
             goToNextStep()
         }
     }
@@ -54,7 +53,7 @@ class NewContractStepThreeFragment : Fragment() {
     private fun goToNextStep() {
         val nextFragment = NewContractStepFourFragment()
         requireActivity().supportFragmentManager.beginTransaction()
-            .replace(com.rgp.feedbapp.R.id.container, nextFragment)
+            .replace(R.id.container, nextFragment)
             .addToBackStack(null)
             .commit()
     }

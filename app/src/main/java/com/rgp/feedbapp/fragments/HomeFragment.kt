@@ -8,6 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.rgp.feedbapp.databinding.FragmentHomeBinding
+import com.rgp.feedbapp.helpers.InternetConnectionHelper
+import com.rgp.feedbapp.helpers.ToastHelper
+import com.rgp.feedbapp.utils.AppConstants
 import com.rgp.feedbapp.utils.SocialMedia
 
 
@@ -46,19 +49,35 @@ class HomeFragment : Fragment() {
     }
 
     private fun openBrowserFor(socialMedia: SocialMedia) {
-        var browserIntent: Intent = when (socialMedia) {
-            SocialMedia.FACEBOOK -> {
-                Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/feedback.cdmx/"))
-            }
+        activity?.let {
+            val constants = AppConstants
+            if (InternetConnectionHelper(it).isConnectionEstablished()) {
+                var browserIntent: Intent = when (socialMedia) {
+                    SocialMedia.FACEBOOK -> {
+                        Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse(constants.FACEBOOK_URL)
+                        )
+                    }
 
-            SocialMedia.INSTAGRAM -> {
-                Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/feedback_rock/"))
-            }
+                    SocialMedia.INSTAGRAM -> {
+                        Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse(constants.INSTAGRAM_URL)
+                        )
+                    }
 
-            SocialMedia.YOUTUBE -> {
-                Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/@feedbackmxoldies7833"))
+                    SocialMedia.YOUTUBE -> {
+                        Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse(constants.YOUTUBE_URL)
+                        )
+                    }
+                }
+                startActivity(browserIntent)
+            } else {
+                ToastHelper(it).showToast(AppConstants.NO_INTERNET_CONNECTION)
             }
         }
-        startActivity(browserIntent)
     }
 }

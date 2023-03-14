@@ -6,6 +6,14 @@
     android:background="@color/black"
     tools:context=".fragments.CalendarFragment">
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
+    </ProgressBar>
+
     <TextView
         android:id="@+id/tv_calendar_title"
         android:textColor="@color/white"

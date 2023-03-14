@@ -32,6 +32,11 @@ class NewContractFinalStepFragment : Fragment() {
         return binding.root
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
     // Private methods
     private fun launchAnimation() {
         binding.avApproved.setAnimation(R.raw.approved)

@@ -24,4 +24,9 @@
         <item name="itemTextColor">@color/bnv_tab_item_foreground</item>
     </style>
 
+    <style name="SplashScreen" parent="Theme.FeedbApp">
+        <item name="android:windowBackground">
+            @drawable/app_logo
+        </item>
+    </style>
 </resources>

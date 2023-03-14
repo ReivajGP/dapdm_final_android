@@ -1,7 +1,6 @@
 package com.rgp.feedbapp.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +8,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rgp.feedbapp.adapters.CalendarAdapter
 import com.rgp.feedbapp.databinding.FragmentCalendarBinding
+import com.rgp.feedbapp.helpers.InternetConnectionHelper
+import com.rgp.feedbapp.helpers.ToastHelper
 import com.rgp.feedbapp.model.CalendarItem
 import com.rgp.feedbapp.utils.AppConstants
 import com.rgp.feedbapp.utils.CalendarAPI
@@ -35,9 +36,14 @@ class CalendarFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        requestCalendarEvents()
         _binding = FragmentCalendarBinding.inflate(LayoutInflater.from(context))
+        activity?.let {
+            if (InternetConnectionHelper(it).isConnectionEstablished()) {
+                requestCalendarEvents()
+            } else {
+                ToastHelper(it).showToast(constants.NO_INTERNET_CONNECTION)
+            }
+        }
         return binding.root
     }
 
@@ -48,6 +54,7 @@ class CalendarFragment : Fragment() {
 
     //Private methods
     private fun requestCalendarEvents() {
+        binding.progressBar.visibility = View.VISIBLE
         CoroutineScope(Dispatchers.IO).launch {
             val apiCall = constants.getRetrofit().create(CalendarAPI::class.java).getCalendarEvents(constants.CALENDAR_ENDPOINT)
             apiCall.enqueue(object: Callback<ArrayList<CalendarItem>> {
@@ -55,12 +62,16 @@ class CalendarFragment : Fragment() {
                     call: Call<ArrayList<CalendarItem>>,
                     response: Response<ArrayList<CalendarItem>>
                 ) {
+                    binding.progressBar.visibility = View.INVISIBLE
                     binding.rvCalendar.layoutManager = LinearLayoutManager(requireContext())
                     binding.rvCalendar.adapter = CalendarAdapter(requireContext(), response.body()!!)
                 }
 
                 override fun onFailure(call: Call<ArrayList<CalendarItem>>, t: Throwable) {
-                    Log.e("CALENDAR", "ERROR: No se pudo conectar al servicio: ${t.message}")
+                    binding.progressBar.visibility = View.INVISIBLE
+                    activity?.let {
+                        ToastHelper(it).showToast(constants.CALENDAR_SERVICE_NOT_AVAILABLE_TOAST_MESSAGE)
+                    }
                 }
             })
         }

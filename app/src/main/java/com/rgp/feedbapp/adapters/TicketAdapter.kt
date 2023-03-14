@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rgp.feedbapp.R
 import com.rgp.feedbapp.activities.MainActivity
 import com.rgp.feedbapp.model.TicketItem
+import com.rgp.feedbapp.utils.AppConstants
 
 class TicketAdapter(val context: Context, val ticketItems: ArrayList<TicketItem>): RecyclerView.Adapter<TicketAdapter.TicketItemViewHolder>() {
 
@@ -22,7 +23,7 @@ class TicketAdapter(val context: Context, val ticketItems: ArrayList<TicketItem>
     override fun getItemCount(): Int = ticketItems.size
 
     override fun onBindViewHolder(holder: TicketItemViewHolder, position: Int) {
-        if (ticketItems[position].ticketStatus == 0) {
+        if (ticketItems[position].ticketStatus == AppConstants.TICKET_STATUS_INACTIVE) {
             holder.ivTicketPicture.setImageResource(R.drawable.ticket_expired)
             holder.ivExpired.isVisible = true
         } else {

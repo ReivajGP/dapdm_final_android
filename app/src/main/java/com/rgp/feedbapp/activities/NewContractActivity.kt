@@ -37,14 +37,7 @@ class NewContractActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityNewContractBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        Log.i("NEWCONTRACT","AQUÍ ANDAMOS... CHINGÁNDOLE, NO HAY DE OTRA :3!")
-       // navController = findNavController(R.id.container)
     }
-
-    //override fun onSupportNavigateUp(): Boolean {
-    //    return NavigationUI.navigateUp(navController, null)
-    //}
 
     override fun onResume() {
         super.onResume()

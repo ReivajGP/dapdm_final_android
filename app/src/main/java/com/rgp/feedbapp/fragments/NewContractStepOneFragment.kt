@@ -19,18 +19,18 @@ class NewContractStepOneFragment : Fragment() {
     private val constants = AppConstants
 
     // Lifecycle methods
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         _binding = FragmentNewContractStepOneBinding.inflate(LayoutInflater.from(context))
         setOnClickListeners()
         return binding.root
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     // Private methods

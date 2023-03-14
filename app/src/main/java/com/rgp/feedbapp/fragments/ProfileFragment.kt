@@ -1,13 +1,11 @@
 package com.rgp.feedbapp.fragments
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.FirebaseApp
 import com.rgp.feedbapp.R
 import com.rgp.feedbapp.activities.MainActivity
 import com.rgp.feedbapp.databinding.FragmentProfileBinding
@@ -22,85 +20,86 @@ class ProfileFragment() : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
     private val constants = AppConstants
+    private lateinit var authenticationHelper: AuthenticationHelper
 
     // Fragment lifecycle methods
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
-        FragmentProfileBinding.inflate(inflater, container, false).let {
-            _binding = it
-            it.root
-        }
-
-    override fun onStart() {
-        super.onStart()
-        //auth = FirebaseAuth()
-        //val currentUser = auth.currentUser
-        //Log.d("PROFILE", "HERE WE ARE!")
-        //if (currentUser != null) {
-
-        //}
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentProfileBinding.inflate(LayoutInflater.from(context))
+        binding.progressBar.visibility = View.INVISIBLE
+        return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        activity?.let {
+            FirebaseApp.initializeApp(it)
+            authenticationHelper = AuthenticationHelper(it)
+        }
+        setOnClickListeners()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
     // Private methods
     private fun setOnClickListeners() {
         // Inicio de sesión
         binding.btLogin.setOnClickListener {
-            if (areTextFieldsEntriesValid()) {
-                /*
-                //loaderHelper.presentLoader()
-                (context as MainActivity).authenticationHelper.logIn(binding.etEmail.text.toString(), binding.etPass.text.toString()) { isLoginSuccessful ->
-                  //  loaderHelper.hideLoader()
+            if (areTextFieldsEntriesValid(AuthRequest.LOGIN)) {
+                binding.progressBar.visibility = View.VISIBLE
+                authenticationHelper.logIn(binding.etEmail.text.toString(), binding.etPass.text.toString()) { isLoginSuccessful ->
+                    binding.progressBar.visibility = View.INVISIBLE
                     if (isLoginSuccessful) {
-                        /*
-                        // TODO: Pasar a la pantalla de catálogo
-                        val intent = Intent(this, LyricsCatalogActivity::class.java).apply {
-                            putExtra(Constants.INTENT_USER_ID, binding.etEmail.text.toString())
-                        }
-                        startActivity(intent)
-                        finish()
-                        */
-                        Log.d("PERFIL", "SESIÓN INICIADA")
+                        binding.avApproved.setAnimation(R.raw.ready)
+                        binding.avApproved.playAnimation()
                     } else {
-                        Log.d("PERFIL", "PROBLEMA AL INICIAR SESIÓN")
                     }
                 }
-
-                 */
+            } else activity?.let {
+                ToastHelper(it.applicationContext).showToast(constants.ON_EMPTY_FIELD_TOAST_MESSAGE)
             }
         }
 
         // Registro
         binding.btSignIn.setOnClickListener {
-            if (areTextFieldsEntriesValid()) { /*
-                //loaderHelper.presentLoader()
-                (context as MainActivity).authenticationHelper.signIn(binding.etEmail.text.toString(), binding.etPass.text.toString()) { isSignUpSuccessful ->
-                    //loaderHelper.hideLoader()
+            if (areTextFieldsEntriesValid(AuthRequest.SIGNIN)) {
+                binding.progressBar.visibility = View.VISIBLE
+                authenticationHelper.signIn(binding.etEmail.text.toString(), binding.etPass.text.toString()) { isSignUpSuccessful ->
+                    binding.progressBar.visibility = View.INVISIBLE
                     if (isSignUpSuccessful) {
-                        // TODO: Ver qué hacer aquí 🥲
-                        Log.d("PERFIL", "CUENTA CREADA")
                     } else {
-                        Log.d("PERFIL", "PROBLEMA AL CREAR CUENTA")
                     }
                 }
-                */
+            } else activity?.let {
+                ToastHelper(it.applicationContext).showToast(constants.ON_EMPTY_MAIL_TOAST_MESSAGE)
             }
         }
 
         // Recuperación de contraseña
-        /*binding.btRecoverPass.setOnClickListener {
-            (context as MainActivity).authenticationHelper.recoverPassword(binding.etEmail.text.toString())
-        }*/
+        binding.btRecoverPass.setOnClickListener {
+            binding.progressBar.visibility = View.VISIBLE
+            authenticationHelper.recoverPassword(binding.etEmail.text.toString()) {
+                binding.progressBar.visibility = View.INVISIBLE
+            }
+        }
     }
 
-    private fun areTextFieldsEntriesValid(): Boolean {
-        if (binding.etEmail.text.isEmpty() || binding.etPass.text.isEmpty()) {
-            activity?.let {
-                ToastHelper(it.applicationContext).showToast(constants.ON_EMPTY_FIELD_TOAST_MESSAGE)
+    private fun areTextFieldsEntriesValid(request: AuthRequest): Boolean {
+        if (binding.etEmail.text.isNotEmpty()) {
+            when (request) {
+                AuthRequest.LOGIN -> if (binding.etPass.text.isNotEmpty()) return true
+                AuthRequest.SIGNIN, AuthRequest.PASS_RECOVERY -> return true
             }
-            return false
         }
-        return true
+        return false
     }
 }

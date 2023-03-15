@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">FeedbApp</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">Fa</string>
     <string name="band_introduction">y somos una banda de tributo a los clásicos del rock en inglés, desde los 60\'s hasta los 90\'s (y un poquito más). Buscamos traerte la nostalgia de la música que ha llegado para quedarse y divertirnos mucho mientras presentamos nuestro show en tu evento.\n\n ¿Quieres saber quiénes integran la banda? 👇🏼👀 </string>
     <string name="zed_introduction">Soy originario de Baja California la bella, me encanta la música y el arte, tener buenas compañías y conversaciones. Me encantan los animales y los paisajes. Mi hobbie es ser barista 🥂.</string>
     <string name="chuy_introduction">Me encanta el mar, disfruto componer música, fan de las buenas charlas con un buen vino. Disfruto mucho enseñar a las personas a desarrollar sus habilidades académicas y musicales, amo los perros y me hace falta tiempo para un hobbie 📖.</string>

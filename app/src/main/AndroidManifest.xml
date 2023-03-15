@@ -18,9 +18,11 @@
 
         <activity
             android:name=".activities.TicketSummaryActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".activities.NewContractActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".activities.MainActivity"

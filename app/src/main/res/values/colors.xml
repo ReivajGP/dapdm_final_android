@@ -7,4 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!--Introduction screen-->
+    <color name="zed_introduction_bg">#D5AEFC</color>
+    <color name="chuy_introduction_bg">#B7A9E5</color>
+    <color name="guma_introduction_bg">#AEB0FC</color>
+    <color name="rei_introduction_bg">#93AEF5</color>
 </resources>

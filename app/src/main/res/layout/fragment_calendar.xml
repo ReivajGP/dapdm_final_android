@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/white"
     tools:context=".fragments.CalendarFragment">
 
     <ProgressBar
@@ -16,12 +16,13 @@
 
     <TextView
         android:id="@+id/tv_calendar_title"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp"
         android:text="Próximos eventos"
-        android:textSize="25sp"/>
+        android:textSize="@dimen/screen_header"
+        android:textStyle="bold"/>
 
     <include
         android:layout_width="wrap_content"

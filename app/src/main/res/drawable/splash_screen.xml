@@ -4,10 +4,8 @@
     <ImageView
         android:width="250dp"
         android:height="250dp"
-        android:gravity="center">
-
-        <bitmap
-            android:src="@drawable/app_logo"
-            android:gravity="fill_horizontal|fill_vertical" />
+        android:gravity="center"
+        android:src="@drawable/app_logo"
+        android:scaleType="centerCrop">
     </ImageView>
 </layer-list>

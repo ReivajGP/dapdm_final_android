@@ -1,6 +1,5 @@
 package com.rgp.feedbapp.utils
 
-import com.google.android.gms.maps.model.LatLng
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -10,9 +9,10 @@ object AppConstants {
     const val INTENT_MAIN_TO_TICKET_SUMMARY_TICKET_ID = "TICKET"
 
     // URLs
-    const val CALENDAR_BASE_URL = "https://private-5acf0e-feedbapp.apiary-mock.com"
+    const val BASE_URL = "https://private-5acf0e-feedbapp.apiary-mock.com"
     const val CALENDAR_ENDPOINT = "/events"
     const val TICKETS_ENDPOINT = "/tickets"
+    const val COMMENTS_ENDPOINT = "/comments"
     const val FACEBOOK_URL = "https://www.facebook.com/feedback.cdmx/"
     const val INSTAGRAM_URL = "https://www.instagram.com/feedback_rock/"
     const val YOUTUBE_URL = "https://www.youtube.com/@feedbackmxoldies7833"
@@ -97,7 +97,8 @@ object AppConstants {
     const val EMPTY_TEXTFIELD_ENTRIES = "Antes de continuar, verifica que los campos se encuentren llenos"
     const val TICKETS_SERVICE_NOT_AVAILABLE_TOAST_MESSAGE = "¡Oops! El servicio de cargado de tickets no está disponible por el momento. Intenta más tarde."
     const val CALENDAR_SERVICE_NOT_AVAILABLE_TOAST_MESSAGE = "¡Oops! El servicio de cargado de eventos del calendario no está disponible por el momento. Intenta más tarde."
-    const val UNABLE_LOAD_CONTENT_UNLESS_LOGGED_IN_TOAST_MESSAGE = "Para poder acceder a todo el contenido de este apartado debes tener tu sesión iniciada."
+    const val COMMENTS_SERVICE_NOT_AVAILABLE_TOAST_MESSAGE = "¡Oops! El servicio de cargado de eventos del calendario no está disponible por el momento. Intenta más tarde."
+    const val UNABLE_LOAD_CONTENT_UNLESS_LOGGED_IN_TOAST_MESSAGE = "Para poder acceder al contenido completo de este apartado debes iniciar sesión."
 
     // Animations constants
     const val NEW_CONTRACT_APPROVED_ANIMATION_SPEED = 0.5F
@@ -114,7 +115,7 @@ object AppConstants {
     """
     fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(CALENDAR_BASE_URL)
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

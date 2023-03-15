@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/black"
+    android:background="@color/white"
     tools:context=".fragments.HomeFragment">
 
     <RelativeLayout
@@ -14,12 +14,13 @@
 
         <TextView
             android:id="@+id/tv_social_networks_title"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="15dp"
             android:text="¡Síguenos!"
-            android:textSize="25sp"/>
+            android:textSize="25sp"
+            android:textStyle="bold"/>
 
         <include
             android:layout_width="wrap_content"
@@ -33,7 +34,18 @@
             android:layout_height="150dp"
             android:layout_width="wrap_content"
             android:layout_below="@id/tv_social_networks_title"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
             layout="@layout/layout_social_networks"/>
-
     </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:src="@drawable/logo_feedback"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

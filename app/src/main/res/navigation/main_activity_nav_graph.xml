@@ -19,7 +19,7 @@
         android:id="@+id/navigation_contract"
         android:name="com.rgp.feedbapp.fragments.ContractFragment"
         android:label="Contrataciones"
-        tools:layout="@layout/fragment_contract" />
+        tools:layout="@layout/fragment_contract"/>
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.rgp.feedbapp.fragments.ProfileFragment"

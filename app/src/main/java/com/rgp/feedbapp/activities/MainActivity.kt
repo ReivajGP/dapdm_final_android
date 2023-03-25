@@ -3,7 +3,6 @@ package com.rgp.feedbapp.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
@@ -27,7 +26,7 @@ class MainActivity : AppCompatActivity() {
     // Activity lifecycle methods
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_FeedbApp)
-        Thread.sleep(2500)
+        Thread.sleep(constants.LAUNCH_SCREEN_PRESENTATION_MILLISECONDS)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

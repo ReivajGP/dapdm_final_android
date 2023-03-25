@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.firebase.FirebaseApp
 import com.rgp.feedbapp.R
-import com.rgp.feedbapp.activities.MainActivity
 import com.rgp.feedbapp.databinding.FragmentProfileBinding
 import com.rgp.feedbapp.helpers.AuthenticationHelper
 import com.rgp.feedbapp.helpers.ToastHelper
@@ -23,10 +22,6 @@ class ProfileFragment() : Fragment() {
     private lateinit var authenticationHelper: AuthenticationHelper
 
     // Fragment lifecycle methods
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

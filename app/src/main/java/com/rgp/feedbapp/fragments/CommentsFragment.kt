@@ -5,9 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.view.isVisible
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.rgp.feedbapp.R
 import com.rgp.feedbapp.databinding.FragmentCommentsBinding
 import com.rgp.feedbapp.helpers.ToastHelper

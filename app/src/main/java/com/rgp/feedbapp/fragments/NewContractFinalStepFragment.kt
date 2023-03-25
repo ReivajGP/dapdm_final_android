@@ -16,15 +16,10 @@ class NewContractFinalStepFragment : Fragment() {
     private val binding get() = _binding!!
     private val constants = AppConstants
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         _binding = FragmentNewContractFinalStepBinding.inflate(LayoutInflater.from(context))
         launchAnimation()
         binding.tvDetails.text = constants.NEXT_STEPS_INSTRUCTIONS

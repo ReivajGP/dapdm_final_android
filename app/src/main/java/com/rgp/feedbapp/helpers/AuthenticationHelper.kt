@@ -3,7 +3,6 @@ package com.rgp.feedbapp.helpers
 import android.content.Context
 import android.content.DialogInterface
 import android.text.InputType
-import android.util.Log
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth

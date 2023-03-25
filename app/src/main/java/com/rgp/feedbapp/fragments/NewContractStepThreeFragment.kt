@@ -1,16 +1,13 @@
 package com.rgp.feedbapp.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.rgp.feedbapp.R
 import com.rgp.feedbapp.activities.NewContractActivity
-import com.rgp.feedbapp.databinding.FragmentNewContractStepOneBinding
 import com.rgp.feedbapp.databinding.FragmentNewContractStepThreeBinding
-import kotlin.math.min
 
 class NewContractStepThreeFragment : Fragment() {
 

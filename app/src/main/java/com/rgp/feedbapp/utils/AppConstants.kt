@@ -103,6 +103,8 @@ object AppConstants {
     // Animations constants
     const val NEW_CONTRACT_APPROVED_ANIMATION_SPEED = 0.5F
 
+    // Misc
+    const val LAUNCH_SCREEN_PRESENTATION_MILLISECONDS = 2500L
     // Long texts
     const val NEXT_STEPS_INSTRUCTIONS = """
 ¡Hemos recibido tu solicitud! 
